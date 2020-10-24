@@ -1,15 +1,18 @@
-import Vue from 'vue'
-import Vuex from 'vuex'
+import Vue from "vue";
+import Vuex from "vuex";
 
-Vue.use(Vuex)
+import home from "./modules/home.module";
+import chat from "./modules/chat.module";
+import calendar from "./modules/calendar.module";
+import notes from "./modules/notes.module";
+
+Vue.use(Vuex);
 
 export default new Vuex.Store({
-  state: {
-  },
-  mutations: {
-  },
-  actions: {
-  },
-  modules: {
-  }
-})
+    modules: {
+        home,
+        chat,
+        calendar,
+        notes
+    }
+});
