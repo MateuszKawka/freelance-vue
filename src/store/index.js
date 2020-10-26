@@ -5,7 +5,7 @@ import home from "./modules/home.module";
 import chat from "./modules/chat.module";
 import calendar from "./modules/calendar.module";
 import notes from "./modules/notes.module";
-
+import auth from "./modules/auth.module"
 Vue.use(Vuex);
 
 export default new Vuex.Store({
@@ -13,6 +13,7 @@ export default new Vuex.Store({
         home,
         chat,
         calendar,
-        notes
+        notes,
+        auth
     }
 });
