@@ -1,14 +1,14 @@
 // Import Bulma's core
 @import "~bulma/sass/utilities/_all";
-
+@import "./custom-classes";
 // Set your colors
-$primary: #EE4266;
+$primary: #3C91E6;
 $primary-invert: findColorInvert($primary);
 $twitter: #4099FF;
 $twitter-invert: findColorInvert($twitter);
 $white: #FDFFFC;
 $black: #1A1B25;
-
+$text: #171717;
 // Setup $colors to use as bulma classes (e.g. 'is-twitter')
 $colors: (
         "white": ($white, $black),
@@ -34,7 +34,7 @@ $card-shadow: none;
 @import "~buefy/src/scss/buefy";
 
 .router-link-active {
-  background: #EE4266;
+  background: #3C91E6;
 
   span {
     color: $white;

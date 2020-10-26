@@ -1,10 +1,12 @@
 <template>
-
+  <div class="box">
+   Lastest notes box
+  </div>
 </template>
 
 <script>
 export default {
-name: "Notes.vue"
+  name: "Notes box.vue"
 }
 </script>
 
