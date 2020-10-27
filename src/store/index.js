@@ -6,6 +6,8 @@ import chat from "./modules/chat.module";
 import calendar from "./modules/calendar.module";
 import notes from "./modules/notes.module";
 import auth from "./modules/auth.module"
+import works from "./modules/works.module"
+
 Vue.use(Vuex);
 
 export default new Vuex.Store({
@@ -14,6 +16,7 @@ export default new Vuex.Store({
         chat,
         calendar,
         notes,
-        auth
+        auth,
+        works
     }
 });

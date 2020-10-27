@@ -1,5 +1,5 @@
 <template>
-  <b-button @click="addNote" size="is-small" type="is-success">Add note</b-button>
+  <b-button @click="addNote" size="is-small" type="is-primary">Add note</b-button>
 </template>
 
 <script>

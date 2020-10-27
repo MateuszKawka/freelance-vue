@@ -15,6 +15,7 @@
 <script>
 import {mapActions} from "vuex"
 import {GET_NOTE} from "../../../store/actions.types";
+import {SET_EDIT_MODE} from "../../../store/mutations.types";
 
 export default {
   name: "NotePreview",
@@ -33,6 +34,7 @@ export default {
       getNote: GET_NOTE
     }),
     openNote() {
+      this.$store.commit(SET_EDIT_MODE, false)
       this.getNote(this.note.id)
     }
   }
@@ -40,11 +42,11 @@ export default {
 </script>
 
 <style scoped>
-.card--active {
-  background: #f4f4f4;
-}
+/*.card--active {*/
+/*  background: #f4f4f4;*/
+/*}*/
 
-.card:hover {
-  background: #f4f4f4;
-}
+/*.card:hover {*/
+/*  background: #f4f4f4;*/
+/*}*/
 </style>

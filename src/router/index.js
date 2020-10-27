@@ -1,14 +1,17 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
-import { auth } from '../common/firebase'
+import {auth} from '../common/firebase'
+import store from "../store/index"
+import {SET_USER, SET_LOGGED_IN} from "../store/mutations.types";
+
 Vue.use(VueRouter)
 
 const routes = [
     {
-      path: '/',
-      name: 'Login',
-      component: () => import("../views/LoginView")
+        path: '/',
+        name: 'Login',
+        component: () => import("../views/LoginView")
     },
     {
         path: '/home',
@@ -53,11 +56,17 @@ const router = new VueRouter({
 })
 
 router.beforeEach((to, from, next) => {
-    const requiresAuth = to.matched.some(x => x.meta.requiresAuth)
-console.log(requiresAuth)
-    console.log(auth)
-    if (requiresAuth && !auth.currentUser) {
-        next('/login')
+    const requiresAuth = to.matched.some(record => record.meta.requiresAuth)
+    if (requiresAuth) {
+        auth.onAuthStateChanged(function (user) {
+            if (user) {
+                store.commit(SET_USER, user)
+                store.commit(SET_LOGGED_IN, true)
+                next()
+            } else {
+                router.push('/')
+            }
+        });
     } else {
         next()
     }

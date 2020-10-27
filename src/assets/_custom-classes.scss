@@ -1,3 +1,8 @@
 .is-pointer {
   cursor: pointer;
 }
+
+.is-fullheight {
+  height: 100%;
+  min-height: 100vh;
+}

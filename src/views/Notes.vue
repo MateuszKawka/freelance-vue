@@ -5,16 +5,19 @@
       <div class="column is-12 has-text-right">
         <AddNoteButton/>
       </div>
-      <div class="column is-6">
-        <p>Notes</p>
-        <NotesList @emitClick="pickNote"/>
+      <div class="column has-text-right is-offset-1" :class="notesListVisible ? 'is-4': 'is-1'">
+        <b-icon
+            :icon="notesListVisible? 'arrow-collapse-horizontal' : 'arrow-expand-horizontal'"
+            @click.native="hideNotesList">
+        </b-icon>
+        <div class="box" v-show="notesListVisible">
+          <NotesList @emitClick="pickNote"/>
+        </div>
       </div>
-      <div class="column is-6">
+      <div class="column is-offset-1" :class="notesListVisible ? 'is-5': 'is-8'">
         <Note v-if="isNotePicked"/>
-
         <p class="has-text-centered" v-else>
           Select note from list or create new !
-          <AddNoteButton />
         </p>
       </div>
     </div>
@@ -40,7 +43,8 @@ export default {
   data() {
     return {
       showAddNode: false,
-      note: false
+      note: false,
+      notesListVisible: true
     }
   },
   computed: {
@@ -57,11 +61,13 @@ export default {
     },
     removeNote() {
       console.log('remove')
+    },
+    hideNotesList() {
+      this.notesListVisible = !this.notesListVisible
     }
   },
   mounted() {
     this.getNotes()
-    this.removeNote()
   }
 }
 </script>

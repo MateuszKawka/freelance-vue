@@ -1,7 +1,8 @@
 <template>
-  <div>
-    <b-button tag="router-link" to="/notes" size="is-small">Back to notes</b-button>
-    <Editor v-model="content" previewStyle="tab" @change="change"  ref="toastuiEditor"/>
+  <div class="container">
+    <b-icon icon="close-circle-outline" size="is-medium" @click.native="backToNotes" class="is-pointer"></b-icon>
+    <Editor v-model="content" previewStyle="tab" @change="change" ref="toastuiEditor" class="mt-6"/>
+    <b-button @click.native="addNote">Add note</b-button>
   </div>
 </template>
 
@@ -9,22 +10,31 @@
 import 'codemirror/lib/codemirror.css';
 import '@toast-ui/editor/dist/toastui-editor.css';
 
-import { Editor } from '@toast-ui/vue-editor';
+import {Editor} from '@toast-ui/vue-editor';
+import {CREATE_NOTE} from "../../../store/actions.types";
 
 export default {
   name: "AddNote",
+  data() {
+    return {
+      content: ""
+    }
+  },
   components: {
     Editor
   },
   methods: {
     change(e) {
-      let html = this.$refs.toastuiEditor.invoke('getMarkdown');
-     console.log(html)
-    }
-  },
-  data() {
-    return {
-      content: '',
+      this.content = this.$refs.toastuiEditor.invoke('getMarkdown');
+    },
+    addNote() {
+      let note = {
+        content: this.content
+      }
+      this.$store.dispatch(CREATE_NOTE, note)
+    },
+    backToNotes() {
+      this.$router.push('/notes')
     }
   }
 }

@@ -1,6 +1,6 @@
 <template>
-  <ul>
-    <PerfectScrollbarWrapper>
+  <ul class="is-fixed">
+    <PerfectScrollbarWrapper height="60vh">
       <NotePreview @click="emitClick" v-for="noteItem in notes" :key="noteItem.id" :note="noteItem" :active="note.id === noteItem.id" />
     </PerfectScrollbarWrapper>
   </ul>
