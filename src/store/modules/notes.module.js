@@ -1,38 +1,55 @@
-import {SET_NOTE, SET_NOTES} from "../mutations.types";
-import {GET_NOTES, GET_NOTE} from "../actions.types";
+import {SET_NOTE, SET_NOTES, SET_EDIT_MODE,} from "../mutations.types";
+import {GET_NOTES, GET_NOTE, CREATE_NOTE, UPDATE_NOTE, REMOVE_NOTE} from "../actions.types";
+import * as fb from '../../common/firebase'
 
 export default {
     state: {
         notes: [],
-        note: {}
+        note: {},
+        isEditMode: false
     },
     mutations: {
         [SET_NOTE]: (state, noteID) => state.note = state.notes.find(note => note.id === noteID),
-        [SET_NOTES]: (state, notes) => state.notes = notes
+        [SET_NOTES]: (state, notes) => state.notes = notes,
+        [SET_EDIT_MODE]: (state, editMode) => state.isEditMode = editMode
     },
     actions: {
         [GET_NOTES]({commit}) {
+            fb.notesCollection.orderBy('createdAt', 'desc').onSnapshot(snapshot => {
+                let notes = []
+                snapshot.forEach(doc => {
+                    let note = doc.data()
+                    note.id = doc.id
 
-            commit(SET_NOTES, NOTES)
+                    notes.push(note)
+                })
+                console.log('GET NOTES')
+                console.log(notes)
+                commit(SET_NOTES, notes)
+            })
         },
         [GET_NOTE]({commit}, noteID) {
             commit(SET_NOTE, noteID)
+        },
+        async [CREATE_NOTE]({state, commit, dispatch}, note) {
+            await fb.notesCollection.add({
+                createdAt: new Date(),
+                content: note.content,
+                updatedAt: "26 października 2020 14:00:00 UTC+1"
+            })
+            dispatch(GET_NOTES)
+        },
+        async [UPDATE_NOTE]({dispatch}, note) {
+            await fb.notesCollection.doc(note.id).update({
+                ...note
+            })
+            console.log('store')
+            console.log(note)
+            dispatch(GET_NOTES)
+        },
+        async [REMOVE_NOTE]({dispatch}, noteID) {
+            await fb.notesCollection.doc(noteID).delete()
+            dispatch(GET_NOTES)
         }
     }
 }
-
-
-const NOTES = [
-    {
-        id: 1,
-        content: "Hello there content"
-    },
-    {
-        id: 2,
-        content: "Hello there content 2"
-    },
-    {
-        id: 3,
-        content: "Hello there content 3"
-    }
-];

@@ -2,14 +2,21 @@
 @import "~bulma/sass/utilities/_all";
 @import "./custom-classes";
 @import "./forms";
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap');
 // Set your colors
-$primary: #3C91E6;
+$primary: #4357AD;
 $primary-invert: findColorInvert($primary);
 $twitter: #4099FF;
 $twitter-invert: findColorInvert($twitter);
 $white: #FDFFFC;
-$black: #1A1B25;
+$black: #020202;
 $text: #171717;
+$info: #008FCC;
+$danger: #E85F5C;
+$warning: #FEFFA5;
+$custom-font: "Roboto", sans-serif;
+$family-primary: $custom-font;
+
 // Setup $colors to use as bulma classes (e.g. 'is-twitter')
 $colors: (
         "white": ($white, $black),
@@ -30,18 +37,23 @@ $link-invert: $primary-invert;
 $link-focus-border: $primary;
 $card-shadow: none;
 
+
+$menu-item-hover-color: $white;
+$menu-item-hover-background-color: $primary;
+
 // Import Bulma and Buefy styles
 @import "~bulma";
 @import "~buefy/src/scss/buefy";
 
-.router-link-active {
-  background: #3C91E6;
 
-  span {
-    color: $white;
-  }
+.router-link-exact-active {
+  background: $primary;
+}
 
-  &:hover {
-    background: green;
-  }
+.router-link-exact-active span {
+  color: $primary-invert;
+}
+
+.menu-list a {
+  border-radius: 0;
 }

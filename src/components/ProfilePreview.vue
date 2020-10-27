@@ -3,7 +3,7 @@
     <div class="card-content">
       <div class="media">
           <figure class="image is-96x96">
-            <img src="https://bulma.io/images/placeholders/96x96.png" alt="Placeholder image">
+            <img src="https://avatar.oxro.io/avatar.svg?name=MateuszKawka&length=1" alt="Placeholder image">
           </figure>
         </div>
         <div class="media-content">
