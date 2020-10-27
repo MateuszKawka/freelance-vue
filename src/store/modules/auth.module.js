@@ -20,17 +20,16 @@ export default {
             dispatch(GET_USER_DATA, user)
         },
         async [GET_USER_DATA]({commit}, user) {
-            const userProfile = await fb.usersCollection.doc(user.uid).get()
+            const userProfile = fb.auth.currentUser
+            console.log(userProfile)
             commit(SET_LOGGED_IN, true)
-            commit(SET_USER, userProfile.data())
-            router.push('home')
+            commit(SET_USER, userProfile)
+            await router.push('home')
         },
         async [REGISTER]({dispatch}, form) {
             const {user} = await fb.auth.createUserWithEmailAndPassword(form.email, form.password)
-            await fb.usersCollection.doc(user.uid).set({
-                name: form.name,
-                email: form.email,
-                password: form.password
+            await user.updateProfile({
+                displayName: form.name
             })
             dispatch(GET_USER_DATA, user)
         },
@@ -39,7 +38,7 @@ export default {
             commit(SET_LOGGED_IN, false)
             // clear userProfile and redirect to /login
             commit(SET_USER, {})
-            router.push('/')
+            await router.push('/')
         }
     }
 }

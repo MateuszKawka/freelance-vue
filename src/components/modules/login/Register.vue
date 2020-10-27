@@ -47,12 +47,12 @@ export default {
     }
   },
   methods: {
-    register(e) {
-      e.preventDefault();
+    register() {
+      console.log('resigster')
       this.$store.dispatch(REGISTER, {
-        email: this.email,
-        password: this.password,
-        name: this.name
+        email: this.form.email,
+        password: this.form.password,
+        name: this.form.name
       })
     }
   }
