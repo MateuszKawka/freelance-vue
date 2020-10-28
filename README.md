@@ -6,7 +6,7 @@
 * Buefy
 
 ## Roadmap
-![Preview]("./readme_images/preview.png" "Preview")
+![Preview](./readme_images/preview.png "Preview")
 #### Modules:
 * Notes - done
 * Calendar - in development
