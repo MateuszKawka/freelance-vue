@@ -27,16 +27,14 @@
           type="email"
           label="Email"
           name="email"
-          error-behavior="live"
-          validation="email"
+          validation="bail|email"
       />
       <FormulateInput
           type="password"
           label="Password"
           name="password"
           help="Min 6 characters"
-          error-behavior="live"
-          validation="required|min:6"
+          validation="bail|required|min:6"
       />
 
       <FormulateInput

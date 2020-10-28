@@ -1,4 +1,4 @@
-import {SET_NOTE, SET_NOTES, SET_EDIT_MODE,} from "../mutations.types";
+import {SET_NOTE, SET_NOTES, SET_EDIT_MODE,CLEAR_NOTE} from "../mutations.types";
 import {GET_NOTES, GET_NOTE, CREATE_NOTE, UPDATE_NOTE, REMOVE_NOTE} from "../actions.types";
 import * as fb from '../../common/firebase'
 
@@ -10,6 +10,7 @@ export default {
     },
     mutations: {
         [SET_NOTE]: (state, noteID) => state.note = state.notes.find(note => note.id === noteID),
+        [CLEAR_NOTE]: state => state.note = {},
         [SET_NOTES]: (state, notes) => state.notes = notes,
         [SET_EDIT_MODE]: (state, editMode) => state.isEditMode = editMode
     },

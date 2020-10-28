@@ -1,24 +1,27 @@
 <template>
-  <div>
-    <NotesSettings/>
+  <div class="container">
+    <div class="box is-shadowless has-background-white-ter">
+      <NotesSettings/>
+    </div>
     <div class="columns is-multiline">
-      <div class="column is-12 has-text-right">
-        <AddNoteButton/>
-      </div>
-      <div class="column has-text-right is-offset-1" :class="notesListVisible ? 'is-4': 'is-1'">
-        <b-icon
-            :icon="notesListVisible? 'arrow-collapse-horizontal' : 'arrow-expand-horizontal'"
-            @click.native="hideNotesList">
-        </b-icon>
-        <div class="box" v-show="notesListVisible">
-          <NotesList @emitClick="pickNote"/>
+      <div class="column" :class="notesListVisible ? 'is-4': 'is-1'">
+        <p class="is-flex is-justify-content-flex-start is-pointer mb-5">
+          <span class="pr-2">Notes</span>
+          <b-icon
+              :icon="notesListVisible? 'arrow-collapse-horizontal' : 'arrow-expand-horizontal'"
+              @click.native="hideNotesList">
+          </b-icon>
+        </p>
+        <div>
+          <div class="card" v-show="notesListVisible">
+            <NotesList @emitClick="pickNote"/>
+          </div>
+          <b-button @click="addNote" size="is-small" type="is-primary" icon-right="playlist-plus" v-show="notesListVisible" class="mt-4">Add note</b-button>
         </div>
       </div>
-      <div class="column is-offset-1" :class="notesListVisible ? 'is-5': 'is-8'">
+      <div class="column" :class="notesListVisible ? 'is-8': 'is-12'">
         <Note v-if="isNotePicked"/>
-        <p class="has-text-centered" v-else>
-          Select note from list or create new !
-        </p>
+        <AddNote class="mt-6" v-else></AddNote>
       </div>
     </div>
   </div>
@@ -31,14 +34,16 @@ import NotesSettings from "@/components/modules/notes/NotesSettings";
 import AddNoteButton from "../components/modules/notes/AddNoteButton";
 import {mapActions} from "vuex";
 import {GET_NOTES} from "../store/actions.types";
-
+import {CLEAR_NOTE} from "../store/mutations.types";
+import AddNote from "../components/modules/notes/AddNote";
 export default {
   name: "Notes",
   components: {
     NotesList,
     Note,
     NotesSettings,
-    AddNoteButton
+    AddNoteButton,
+    AddNote
   },
   data() {
     return {
@@ -64,6 +69,9 @@ export default {
     },
     hideNotesList() {
       this.notesListVisible = !this.notesListVisible
+    },
+    addNote() {
+      this.$store.commit(CLEAR_NOTE)
     }
   },
   mounted() {

@@ -1,8 +1,7 @@
 <template>
   <div class="container">
-    <b-icon icon="close-circle-outline" size="is-medium" @click.native="backToNotes" class="is-pointer"></b-icon>
-    <Editor v-model="content" previewStyle="tab" @change="change" ref="toastuiEditor" class="mt-6"/>
-    <b-button @click.native="addNote">Add note</b-button>
+    <Editor v-model="content" previewStyle="tab" @change="change" ref="toastuiEditor"/>
+    <b-button @click="addNote" size="is-small" type="is-success" class="mt-3" icon-right="content-save">Save</b-button>
   </div>
 </template>
 
@@ -34,7 +33,7 @@ export default {
       this.$store.dispatch(CREATE_NOTE, note)
     },
     backToNotes() {
-      this.$router.push('/notes')
+      this.$emit('cancel')
     }
   }
 }

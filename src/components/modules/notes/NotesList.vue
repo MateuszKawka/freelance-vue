@@ -1,6 +1,6 @@
 <template>
   <ul class="is-fixed">
-    <PerfectScrollbarWrapper height="60vh">
+    <PerfectScrollbarWrapper height="60vh" :options="options">
       <NotePreview @click="emitClick" v-for="noteItem in notes" :key="noteItem.id" :note="noteItem" :active="note.id === noteItem.id" />
     </PerfectScrollbarWrapper>
   </ul>
@@ -12,6 +12,13 @@ import {mapState} from "vuex"
 import PerfectScrollbarWrapper from "../../PerfectScrollbarWrapper";
 export default {
   name: "NotesList.vue",
+  data() {
+    return {
+      options: {
+        wheelPropagation: true
+      }
+    }
+  },
   computed: {
     ...mapState({
       notes: state => state.notes.notes,

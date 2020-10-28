@@ -1,11 +1,11 @@
 <template>
   <div id="app" class="has-background-light">
     <div class="container is-fluid is-paddingless">
-      <div class="columns">
-        <div class="column is-2 has-background-white pl-2 pr-0">
+      <div class="columns is-centered">
+        <div class="column is-2 has-background-white pl-2 pr-0" v-if="loggedIn">
           <Menu/>
         </div>
-        <div class="column is-10 is-fullheight is-relative">
+        <div class="column is-10 is-fullheight is-relative" >
           <div v-if="isLoading">
             <Loader/>
           </div>
@@ -30,6 +30,9 @@ export default {
   computed: {
     isLoading() {
       return false;
+    },
+    loggedIn() {
+      return this.$store.state.auth.user.loggedIn
     }
 
   }

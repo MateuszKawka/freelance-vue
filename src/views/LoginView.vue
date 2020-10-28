@@ -2,25 +2,9 @@
   <div>
     <div class="columns is-multiline">
       <div class="column is-6 is-offset-3">
-        <button @click="loginBind">Sign up</button>
-        <b-field>
-          <b-radio-button v-model="login"
-                          native-value="true"
-                          @click.native="loginBind(true)"
-                          type="is-danger">
-            <b-icon icon="close"></b-icon>
-            <span>Sign In</span>
-          </b-radio-button>
-
-
-          <b-radio-button v-model="login"
-                          native-value="false"
-                          @click.native="loginBind(false)"
-                          type="is-success">
-            <b-icon icon="check"></b-icon>
-            <span>Sign Up</span>
-          </b-radio-button>
-        </b-field>
+        <div class="has-text-right">
+          <b-button @click.native="loginBind()" size="is-small" type="is-success" class="mb-3">{{ login ? 'Sign up' : 'Sign in' }}</b-button>
+        </div>
         <Login v-if="login"/>
         <Register v-else/>
       </div>
@@ -44,8 +28,8 @@ export default {
     Register
   },
   methods: {
-    loginBind(value) {
-      this.login = value
+    loginBind() {
+      this.login = !this.login
     }
   }
 }

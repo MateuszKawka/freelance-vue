@@ -1,13 +1,15 @@
 <template>
-  <b-menu v-if="loggedIn">
+  <b-menu>
     <ProfilePreview/>
-    <b-menu-list>
-      <b-menu-item tag="router-link" :icon="menuItem.icon" :label="menuItem.label" :to="menuItem.path"
-                   class="is-radiusless"
-                   v-for="menuItem in MENU_ITEMS" :key="menuItem.label">
-      </b-menu-item>
-      <b-menu-item icon="location-exit" label="Log out" @click.native="logout" class="is-radiusless"></b-menu-item>
-    </b-menu-list>
+    <div class="mt-5">
+      <b-menu-list>
+        <b-menu-item tag="router-link" :icon="menuItem.icon" :label="menuItem.label" :to="menuItem.path"
+                     class="is-radiusless"
+                     v-for="menuItem in MENU_ITEMS" :key="menuItem.label">
+        </b-menu-item>
+        <b-menu-item icon="location-exit" label="Log out" @click.native="logout" class="is-radiusless"></b-menu-item>
+      </b-menu-list>
+    </div>
   </b-menu>
 </template>
 
@@ -19,11 +21,6 @@ export default {
   name: "Menu",
   components: {
     ProfilePreview
-  },
-  computed: {
-    loggedIn() {
-      return this.$store.state.auth.user.loggedIn
-    }
   },
   methods: {
     logout() {

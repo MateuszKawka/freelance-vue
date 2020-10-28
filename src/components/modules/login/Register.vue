@@ -1,7 +1,7 @@
 <template>
-  <section class="box">
+  <section class="box is-flex is-justify-content-flex-center">
     <FormulateForm
-        class="login-form"
+        class="login-form "
         v-model="form"
         @submit="register"
     >
@@ -10,15 +10,13 @@
           label="Name"
           help="Min 3 characters"
           name="name"
-          error-behavior="live"
-          validation="required|min:3"
+          validation="bail|required|min:3"
       />
       <FormulateInput
           type="email"
           label="Email"
           name="email"
-          error-behavior="live"
-          validation="email"
+          validation="bail|email"
       />
 
       <FormulateInput
@@ -26,8 +24,7 @@
           label="Password"
           name="password"
           help="Min 6 characters"
-          error-behavior="live"
-          validation="required|min:6"
+          validation="bail|required|min:6"
       />
       <FormulateInput
           type="submit"
@@ -48,7 +45,6 @@ export default {
   },
   methods: {
     register() {
-      console.log('resigster')
       this.$store.dispatch(REGISTER, {
         email: this.form.email,
         password: this.form.password,

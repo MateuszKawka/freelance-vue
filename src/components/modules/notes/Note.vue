@@ -1,16 +1,41 @@
 <template>
   <div>
-    <div class="has-background-white-ter">
-      <b-icon icon="pencil-outline is-clickable" @click.native="editNote" @click="editNote" custom-size="mdi-18px"></b-icon>
-      <b-icon icon="delete-outline" @click.native="removeNote" custom-size="mdi-18px"></b-icon>
-      <b-icon icon="close-circle-outline" @click.native="back" class="is-pointer" custom-size="mdi-18px"></b-icon>
-    </div>
-    <div class="box">
+    <div class="card mt-0 pb-5 pt-2 px-5">
+      <div class="has-text-right mb-4">
+        <b-button type="is-danger"
+                  icon-right="delete-outline"
+                  size="is-small"
+                  @click.native="removeNote"
+        >
+          Delete
+        </b-button>
+        <b-button type="is-success"
+                  icon-right="pencil-outline"
+                  v-if="!isEditMode"
+                  @click.native="editNote"
+                  size="is-small"
+                  class="ml-4"
+        >
+          Edit
+        </b-button>
+        <!--      <b-icon icon="pencil-outline is-clickable" @click.native="editNote" @click="editNote" custom-size="mdi-18px"></b-icon>-->
+        <!--      <b-icon icon="delete-outline" @click.native="removeNote" custom-size="mdi-18px"></b-icon>-->
+        <!--      <b-icon icon="close-circle-outline" @click.native="back" class="is-pointer" custom-size="mdi-18px"></b-icon>-->
+      </div>
       <Viewer previewStyle="tab" @change="change" :initialValue="note.content" ref="mdViewer" v-if="!isEditMode"/>
 
       <div class="note-editor" v-else>
         <Editor previewStyle="tab" :initialValue="note.content" ref="mdEditorEdit" @change="change"/>
-        <b-button @click="saveNote">Save</b-button>
+        <b-button @click="saveNote" size="is-small" type="is-success" class="mt-3" icon-right="content-save">Save</b-button>
+        <b-button type="is-warning"
+                  icon-right="close-circle-outline"
+                  v-if="isEditMode"
+                  @click.native="back"
+                  size="is-small"
+                  class="ml-4 mt-3"
+        >
+          Cancel
+        </b-button>
       </div>
     </div>
   </div>
