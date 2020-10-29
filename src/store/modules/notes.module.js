@@ -24,8 +24,6 @@ export default {
 
                     notes.push(note)
                 })
-                console.log('GET NOTES')
-                console.log(notes)
                 commit(SET_NOTES, notes)
             })
         },

@@ -1,6 +1,6 @@
 <template>
   <div class="box">
-   Lastest notes box
+
   </div>
 </template>
 
