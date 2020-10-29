@@ -8,3 +8,7 @@ export const LOGIN = "LOGIN"
 export const GET_USER_DATA = "GET_USER_DATA"
 export const REGISTER = "REGISTER"
 export const LOG_OUT = "LOG_OUT"
+
+export const GET_SCHEDULES = "GET_SCHEDULES"
+
+export const ADD_SCHEDULE = "ADD_SCHEDULE";

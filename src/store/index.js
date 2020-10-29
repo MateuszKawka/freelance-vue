@@ -7,10 +7,17 @@ import calendar from "./modules/calendar.module";
 import notes from "./modules/notes.module";
 import auth from "./modules/auth.module"
 import works from "./modules/works.module"
+import {BIND_MENU_REDUCE} from "./mutations.types";
 
 Vue.use(Vuex);
 
 export default new Vuex.Store({
+    state: {
+        menuReduce: false
+    },
+    mutations: {
+        [BIND_MENU_REDUCE]: state => state.menuReduce = !state.menuReduce
+    },
     modules: {
         home,
         chat,

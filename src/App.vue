@@ -2,15 +2,17 @@
   <div id="app" class="has-background-light">
     <div class="container is-fluid is-paddingless">
       <div class="columns is-centered">
-        <div class="column is-2 has-background-white pl-2 pr-0" v-if="loggedIn">
+        <div v-if="loggedIn">
           <Menu/>
         </div>
-        <div class="column is-10 is-fullheight is-relative" >
+        <div class="column is-fullheight is-relative" :class="menuReduced ? 'is-11' : 'is-9'">
           <div v-if="isLoading">
             <Loader/>
           </div>
           <div v-else class="pt-5">
+            <transition name="fade" mode="out-in">
             <router-view/>
+            </transition>
           </div>
         </div>
       </div>
@@ -33,6 +35,9 @@ export default {
     },
     loggedIn() {
       return this.$store.state.auth.user.loggedIn
+    },
+    menuReduced() {
+      return this.$store.state.menuReduce
     }
 
   }
